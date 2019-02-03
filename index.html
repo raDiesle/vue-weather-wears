@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+    <p>
+      {{temp}}
+    </p> 
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        apiResult: {},
+        temp: 0
+      },
+      mounted () {
+        var url = 'https://cors-anywhere.herokuapp.com/https://samples.openweathermap.org/data/2.5/weather?id=6556314&appid=6a2c0abf785f85cf8fcd1e95a3223720';
+        console.log('a');
+        axios
+          .get(url)
+          .then(response => {
+            this.apiResult = response.data;
+            this.temp = this.apiResult.main.temp - 273.15;
+            console.log('c');
+          });
+          console.log('b');
+      }
+    });
+
+
+    
+
+  </script>
+</body>
+</html>
